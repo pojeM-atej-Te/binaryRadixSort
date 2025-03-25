@@ -54,7 +54,7 @@ int main(){
     cout << endl;
 
     // Assuming radixSort is implemented
-    bubbleSortByBit(radixSortArr);
+    bubbleSortByBit(radixSortArr, 0);
     
     cout << "Sorted array using Radix Sort: ";
     for (int num : radixSortArr) {
