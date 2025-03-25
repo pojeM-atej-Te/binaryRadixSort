@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
+
 using namespace std;
 
 // Bubble Sort po k-tem bitu
@@ -16,29 +19,56 @@ void bubbleSortByBit(vector<unsigned char>& arr, int k) {
     }
 }
 
-// Popolni binarni Radix sort (iterira skozi vseh 8 bitov)
+// Popolni binarni Radix sort
 void binaryRadixSort(vector<unsigned char>& arr) {
     for (int k = 0; k < 8; ++k) {
         bubbleSortByBit(arr, k);
     }
 }
 
-int main() {
-    vector<unsigned char> arr = {170, 45, 75, 90, 255, 24, 2, 66};
-
-    cout << "Original array: ";
-    for (int num : arr) {
-        cout << (int)num << " ";
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        cerr << "Uporaba: " << argv[0] << " <vhodna_datoteka>" << endl;
+        return 1;
     }
-    cout << endl;
 
-    binaryRadixSort(arr);
-
-    cout << "Sorted array using Binary Radix Sort: ";
-    for (int num : arr) {
-        cout << (int)num << " ";
+    string vhodna_pot = argv[1];
+    ifstream vhodna(vhodna_pot);
+    if (!vhodna) {
+        cerr << "Napaka pri odpiranju datoteke: " << vhodna_pot << endl;
+        return 1;
     }
-    cout << endl;
+
+    vector<unsigned char> stevila;
+    string vrstica, stevilo;
+    
+    // Preberi vsa števila iz datoteke
+    while (getline(vhodna, vrstica)) {
+        stringstream ss(vrstica);
+        while (ss >> stevilo) {
+            stevila.push_back(static_cast<unsigned char>(stoi(stevilo)));
+        }
+    }
+    vhodna.close();
+
+    // Izvedi Radix sort
+    binaryRadixSort(stevila);
+
+    // Zapiši sortirana števila v datoteko out.txt
+    ofstream izhod("out.txt");
+    if (!izhod) {
+        cerr << "Napaka pri ustvarjanju izhodne datoteke!" << endl;
+        return 1;
+    }
+
+    for (size_t i = 0; i < stevila.size(); ++i) {
+        izhod << (int)stevila[i];
+        if (i != stevila.size() - 1) izhod << " ";
+    }
+    izhod << endl;
+
+    izhod.close();
+    cout << "Sortirana števila so zapisana v out.txt" << endl;
 
     return 0;
 }
