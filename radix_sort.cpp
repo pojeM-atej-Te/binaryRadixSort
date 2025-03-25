@@ -44,6 +44,23 @@ int main(){
         cout << num << " ";
     }
     cout << endl;
+
+    // Test Radix Sort
+    vector<unsigned char> radixSortArr = {170, 45, 75, 90, 255, 24, 2, 66};
+    cout << "Original array for Radix Sort: ";
+    for (int num : radixSortArr) {
+        cout << (int)num << " "; // Cast to int for proper display
+    }
+    cout << endl;
+
+    // Assuming radixSort is implemented
+    bubbleSortByBit(radixSortArr);
+    
+    cout << "Sorted array using Radix Sort: ";
+    for (int num : radixSortArr) {
+        cout << (int)num << " "; // Cast to int for proper display
+    }
+    cout << endl;
     
     return 0;
 }
