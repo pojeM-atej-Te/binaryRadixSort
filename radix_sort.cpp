@@ -15,6 +15,7 @@ void bubbleSort(vector<int>& arr) {
     }
 }
 
+<<<<<<< HEAD
 // Bubble sort by k-th bit (for later use in Radix Sort)
 void bubbleSortByBit(vector<unsigned char>& arr, int k) {
     int n = arr.size();
@@ -31,6 +32,10 @@ void bubbleSortByBit(vector<unsigned char>& arr, int k) {
             }
         }
     }
+=======
+void bubbleSortByBit(){
+    
+>>>>>>> origin/main
 }
 
 int main(){
